@@ -15,9 +15,14 @@ test_2 <- train[split == "val" & sub_split == "test"]
 # forecast ----------------------------------------------------------------
 
 test_series <- train_2[, unique(series_id)]
+series <- test_series[1]
 
 for(series in test_series) {
     y <- ts(train_2[series_id == series, consumption], freq = 24)  
-    mdl <- auto.arima(y)
+    
+    plot(y)
+    mdl <- tbats(y)
+    
+    plot(forecast(mdl, 100))
     
 }
