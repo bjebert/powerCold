@@ -28,7 +28,7 @@ get_predictions <- function(train_1, test_1, train_2, test_2, params = NULL) {
     test_2 <- merge(test_2, mean_day_hour, by = c('series_id', 'hour', 'weekday'), all.x = T, sort = F)
     test_2 <- merge(test_2, mean_global, by = c('series_id'), all.x = T, sort = F)
     
-    col_weights <- matrix(rep(params, times = nrow(test_2)),
+    col_weights <- matrix(rep(c(0.0662, 0, 0.8473, 0), times = nrow(test_2)),
                           ncol = 4, byrow = TRUE)
     
     col_weights[is.na(test_2[, .(mean_hour, mean_day, mean_day_hour, mean_global)])] <- 0

@@ -31,3 +31,4 @@ evaluate <- function(model_name = "004", params = NULL) {
 
 # evaluate("003")  # 0.33329
 # evaluate("004")  # 0.30291
+evaluate("005")  # 0.267311

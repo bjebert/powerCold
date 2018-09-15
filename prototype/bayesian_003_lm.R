@@ -19,3 +19,4 @@ BayesianOptimization(bayesian_eval,
                                    w4 = c(0, 1)),
                      init_points = 50,
                      n_iter = 200)
+

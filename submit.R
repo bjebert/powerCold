@@ -1,7 +1,7 @@
 # Submitter - useful for converting submission_hourly back to required submission_format
 
 
-submit <- function(model_name = "004") {
+submit <- function(model_name = "005") {
     if(file.exists(sprintf("submissions/%s.csv", model_name))) {
         stop(sprintf("Submission %s already exists", model_name))
     }
