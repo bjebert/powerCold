@@ -28,7 +28,9 @@ evaluate <- function(model_name = "004", params = NULL) {
 
 # Calls -------------------------------------------------------------------
 
+# evaluate("003")  # CV 0.33329 / LB 0.4169
+# evaluate("004")  # CV 0.30291 / LB 0.6880
+# evaluate("005")  # CV 0.26329 / LB 0.3838
+# evaluate("006")  # CV 0.29082 / LB ?
+# evaluate("007")  # CV 0.26329 / LB ?
 
-# evaluate("003")  # 0.33329
-# evaluate("004")  # 0.30291
-evaluate("005")  # 0.267311

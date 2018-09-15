@@ -6,7 +6,7 @@ source("models/evaluator.R")
 
 bayesian_eval <- function(w1, w2, w3, w4) {
     params <- c(w1, w2, w3, w4)
-    nmae <- evaluate("005", params)
+    nmae <- evaluate("007", params)
     
     list(Score = -nmae,
          Pred = 0)
