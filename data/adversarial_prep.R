@@ -7,8 +7,9 @@
 # series found in the test set
 
 rm(list = ls())
+set.seed(0)
 
-train <- fread("data/train.csv")
+train <- fread("data/train.csv")[, -c('split', 'sub_split')]
 test <- fread("data/test.csv")
 
 train[, is_test := 0]
@@ -30,5 +31,8 @@ test_series <- sample(1:length(series), round(N * length(series)))
 adv_test <- power_data[series_N %in% test_series]
 adv_train <- power_data[!series_N %in% test_series]
 
+adv_eval <- adv_test[, .(is_test = mean(is_test)), by = series_id]
+
 fwrite(adv_train, "data/adv_train.csv", row.names = FALSE)
 fwrite(adv_test, "data/adv_test.csv", row.names = FALSE)
+fwrite(adv_eval, "data/adv_eval.csv", row.names = FALSE)

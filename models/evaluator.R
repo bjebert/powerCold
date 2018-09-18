@@ -1,11 +1,11 @@
 # Libraries ---------------------------------------------------------------
 
 library(data.table)
-set.seed(0)
 
 # Evaluator ---------------------------------------------------------------
 
-evaluate <- function(model_name = "004", params = NULL) {
+evaluate <- function(model_name = "XGB_001", params = NULL) {
+    set.seed(0)
     train <- fread("data/train.csv")
     
     train_1 <- train[split == "train" & sub_split == "train"]
@@ -16,7 +16,7 @@ evaluate <- function(model_name = "004", params = NULL) {
     model_env <- new.env()
     sys.source(sprintf("models/%s/%s.R", model_name, model_name), envir = model_env)
     
-    predictions <- model_env$get_predictions(train_1, test_1, train_2, test_2, params)
+    predictions <- model_env$get_predictions(copy(train_1), copy(test_1), copy(train_2), copy(test_2), params)
     test_2[, predictions := predictions]
     test_2[, m := mean(consumption), by = series_id]
 
@@ -28,9 +28,15 @@ evaluate <- function(model_name = "004", params = NULL) {
 
 # Calls -------------------------------------------------------------------
 
-# evaluate("003")  # CV 0.33329 / LB 0.4169
-# evaluate("004")  # CV 0.30291 / LB 0.6880
-# evaluate("005")  # CV 0.26329 / LB 0.3838
-# evaluate("006")  # CV 0.29082 / LB ?
-# evaluate("007")  # CV 0.26329 / LB ?
+evaluate("003")  # CV 0.27315 / LB 0.4169
+evaluate("004")  # CV 0.27926 / LB 0.6880
+evaluate("005")  # CV 0.19427 / LB 0.3838
+evaluate("006")  # CV 0.26574 / LB ?
+evaluate("007")  # CV 0.19537 / LB 0.3906
+evaluate("LM_001")  # CV 0.19849 / LB 0.3933
+evaluate("LM_002")  # CV 0.21072 / LB ?
+evaluate("XGB_001")  # CV 0.40697 / LB ?
+evaluate("LM_003")  # CV 0.20663
+evaluate("LM_004")  # CV 0.20331 / LB 0.3903
+
 
